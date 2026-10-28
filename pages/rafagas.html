@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/styles.css">
+    <title>Colors, by Pol Rovira</title>
+</head>
+<body>
+    <header>
+        <h1>Colors, by Pol Rovira</h1>
+        <h2>A website with color exercice for visual and mental excercising</h2>
+    </header>
+    <nav>
+        <ul>
+            <li>Rafagas</li>
+            <li>Sequencias</li>
+            <li>Continuo</li>
+            <li>Turnos</li> 
+        </ul>
+    </nav>
+    <main>
+        <h2>Rafagas</h2>
+        <div id="container">
+            <img src="">
+        </div>
+        <button id="start">Start</button>
+        <button id="speed">Speed</button>
+    </main>
+    <script>
+        const container = document.querySelector("div");
+        const image = container.querySelector('img');
+        const startBtn = document.querySelector("#start");
+        const speedBtn = document.querySelector("#speed");
+
+        const imgs = [
+            '../assets/color_black.svg',
+            '../assets/color_blue.svg',
+            '../assets/color_green.svg',
+            '../assets/color_orange.svg',
+            '../assets/color_white.svg',
+            '../assets/position_kneel.svg',
+            '../assets/position_sit.svg',
+            '../assets/position_stand.svg',
+        ]
+
+        let delay = 2000;
+        let intervalId = null;
+        let count = 0;
+        const max = 25;
+
+        function stop(){
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+
+        function start(){
+            stop();
+            count = 0;
+            intervalId = setInterval(imgChange, delay);
+        }
+
+        function imgChange(){
+            const randomIndex = Math.floor(Math.random() * imgs.length);
+            image.src = imgs[randomIndex];
+            count++;
+            if(count >= max) stop();
+        }
+
+        startBtn.addEventListener("click", start);
+
+        speedBtn.addEventListener("click", () => {
+            delay = Math.max(100, delay * 0.8);
+            if(intervalId !== null){
+                start();
+            }
+        })
+    </script>
+    <style>
+       main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #container {
+            width: 50vw;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</body>
+</html>
