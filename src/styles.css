@@ -85,7 +85,7 @@ nav ul {
     gap: 0.25rem;
 }
 
-nav li {
+nav li a{
     padding: 0.55rem 1.2rem;
     border-radius: var(--radius);
     font-size: 0.9rem;
